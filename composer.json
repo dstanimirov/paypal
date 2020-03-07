@@ -1,0 +1,29 @@
+{
+    "name": "openapi/phalcon-plugin-paypal",
+    "type": "library",
+    "description": "PayPal Checkout Phalcon plugin",
+    "keywords": ["Phalcon", "Phalcon plugin", "PayPal Checkout"],
+    "license": "MIT",
+    "support": {
+        "email": "stanimirov.dimitar@gmail.com"
+    },
+    "authors": [
+        {
+            "name": "Dimitar Stanimirov",
+            "email": "stanimirov.dimitar@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "phalcon/incubator": "^3.2",
+        "paypal/paypal-checkout-sdk": "1.0.1"
+    },
+    "require-dev": {
+        "phalcon/ide-stubs": "3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Openapi\\Phalcon\\Plugins\\PayPal\\": "src/"
+        }
+    }
+}

@@ -46,8 +46,16 @@
 ``````
 
 
-*  Creating Order and redirect user to PayPal 
+*  Creating Order and redirect user to PayPal (approve url)
 
 ```
-example-create-order-request.php
+    example-create-order-request.php
 ```
+
+
+*  Accept Order as send to PayPal the OrdersCaptureRequest (return_url)
+
+```
+    example-accept-order-request.php
+```
+

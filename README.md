@@ -2,12 +2,12 @@
 
 **How to use**
 
-*  Config file with PayPal credentials
+*  Create Config file with PayPal credentials
 
 ```
 {
     "sandbox": 1,
-    "brand_name": "",
+    "brand_name": "Custom Brand Name",
     "production": {
         "credentials": {
             "client_id": "client_id_production",
@@ -27,8 +27,8 @@
     },
     "development": {
         "credentials": {
-            "client_id": "client_id_sandbox",
-            "client_secret": "client_secret_sandbox"
+            "client_id": "ATbARdOgav3hGXqWs6mLMchdaGJWGzYJ_oU3VvbT4inI3b6G60y3fFYuQWrfeVO7XaEZsE3hCQgainPU",
+            "client_secret": "EJkxpJEqqY7hrleTk_0M1FAXBw89Tl-ldG6NFoh1shDB0aDtHUunylGMfA65U_q2d_7aZq0J09AdaF44"
         },
         "debug": {
             "enabled": 1,
@@ -46,4 +46,6 @@
 ``````
 
 
+*  Creating Order and redirect user to PayPal 
 
+see example-create-order-request.php

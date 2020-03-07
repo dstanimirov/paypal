@@ -46,14 +46,10 @@
 ``````
 
 
-*  Creating Order and redirect user to PayPal (approve url)
-
-```
-example-create-order-request.php
-```
+*  Creating Order and redirect user to PayPal (example-create-order-request.php)
 
 
-*  Example response from PayPal after Create Order Request
+*  Example response from PayPal after Create Order Request (example-create-order-response.json)
 
 ```
 {
@@ -115,6 +111,7 @@ example-create-order-request.php
 *  Get order ID and approve url
 
 ``````
+
 /* @var $result \Openapi\Phalcon\Plugins\PayPal\Checkout\Types\CreateOrderResponseType */
 $result = $order->getOrderCreateResult();
 
@@ -123,11 +120,172 @@ $order_id = $result->id;
 
 //redirect user to accept the payment
 $redirect_url = $result->links->getApproveUrl();
+
 ``````
 
 
-*  Accept Order as send to PayPal the OrdersCaptureRequest (return_url)
+*  Accept Order as send to PayPal the OrdersCaptureRequest (example-accept-order-request.php)
+
+*  Example response from PayPal after Orders Capture Request (example-accept-order-response.json)
 
 ```
-example-accept-order-request.php
+{
+    "id": "8V127094EB6341009",
+    "intent": "CAPTURE",
+    "purchase_units": [
+        {
+            "reference_id": "B2223DRF343",
+            "amount": {
+                "currency_code": "GBP",
+                "value": "4.80"
+            },
+            "payee": {
+                "email_address": "stanimirov.dimitar-facilitator@gmail.com",
+                "merchant_id": "SS728YLJSZBBC"
+            },
+            "description": "My unit 2",
+            "shipping": {
+                "name": {
+                    "full_name": "stanimirov dimitar buyer"
+                },
+                "address": {
+                    "address_line_1": "1 Main St",
+                    "admin_area_2": "San Jose",
+                    "admin_area_1": "CA",
+                    "postal_code": "95131",
+                    "country_code": "US"
+                }
+            },
+            "payments": {
+                "captures": [
+                    {
+                        "id": "86W56220NW5158817",
+                        "status": "PENDING",
+                        "status_details": {
+                            "reason": "RECEIVING_PREFERENCE_MANDATES_MANUAL_ACTION"
+                        },
+                        "amount": {
+                            "currency_code": "GBP",
+                            "value": "4.80"
+                        },
+                        "final_capture": true,
+                        "seller_protection": {
+                            "status": "ELIGIBLE",
+                            "dispute_categories": [
+                                "ITEM_NOT_RECEIVED",
+                                "UNAUTHORIZED_TRANSACTION"
+                            ]
+                        },
+                        "links": [
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/payments/captures/86W56220NW5158817",
+                                "rel": "self",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/payments/captures/86W56220NW5158817/refund",
+                                "rel": "refund",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8V127094EB6341009",
+                                "rel": "up",
+                                "method": "GET"
+                            }
+                        ],
+                        "create_time": "2020-03-05T18:41:29Z",
+                        "update_time": "2020-03-05T18:41:29Z"
+                    }
+                ]
+            }
+        },
+        {
+            "reference_id": "AA243DRF343",
+            "amount": {
+                "currency_code": "GBP",
+                "value": "2.80"
+            },
+            "payee": {
+                "email_address": "stanimirov.dimitar-facilitator@gmail.com",
+                "merchant_id": "SS728YLJSZBBC"
+            },
+            "description": "My unit 1",
+            "shipping": {
+                "name": {
+                    "full_name": "stanimirov dimitar buyer"
+                },
+                "address": {
+                    "address_line_1": "1 Main St",
+                    "admin_area_2": "San Jose",
+                    "admin_area_1": "CA",
+                    "postal_code": "95131",
+                    "country_code": "US"
+                }
+            },
+            "payments": {
+                "captures": [
+                    {
+                        "id": "8RU87954EX614193P",
+                        "status": "PENDING",
+                        "status_details": {
+                            "reason": "RECEIVING_PREFERENCE_MANDATES_MANUAL_ACTION"
+                        },
+                        "amount": {
+                            "currency_code": "GBP",
+                            "value": "2.80"
+                        },
+                        "final_capture": true,
+                        "seller_protection": {
+                            "status": "ELIGIBLE",
+                            "dispute_categories": [
+                                "ITEM_NOT_RECEIVED",
+                                "UNAUTHORIZED_TRANSACTION"
+                            ]
+                        },
+                        "links": [
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/payments/captures/8RU87954EX614193P",
+                                "rel": "self",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/payments/captures/8RU87954EX614193P/refund",
+                                "rel": "refund",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8V127094EB6341009",
+                                "rel": "up",
+                                "method": "GET"
+                            }
+                        ],
+                        "create_time": "2020-03-05T18:41:32Z",
+                        "update_time": "2020-03-05T18:41:32Z"
+                    }
+                ]
+            }
+        }
+    ],
+    "payer": {
+        "name": {
+            "given_name": "stanimirov dimitar",
+            "surname": "buyer"
+        },
+        "email_address": "stanimirov.dimitar-buyer@gmail.com",
+        "payer_id": "YS94PPRE9CTFJ",
+        "address": {
+            "country_code": "US"
+        }
+    },
+    "create_time": "2020-03-05T18:41:29Z",
+    "update_time": "2020-03-05T18:41:29Z",
+    "links": [
+        {
+            "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8V127094EB6341009",
+            "rel": "self",
+            "method": "GET"
+        }
+    ],
+    "status": "COMPLETED"
+}
 ```

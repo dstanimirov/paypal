@@ -27,8 +27,8 @@
     },
     "development": {
         "credentials": {
-            "client_id": "ATbARdOgav3hGXqWs6mLMchdaGJWGzYJ_oU3VvbT4inI3b6G60y3fFYuQWrfeVO7XaEZsE3hCQgainPU",
-            "client_secret": "EJkxpJEqqY7hrleTk_0M1FAXBw89Tl-ldG6NFoh1shDB0aDtHUunylGMfA65U_q2d_7aZq0J09AdaF44"
+            "client_id": "",
+            "client_secret": "-"
         },
         "debug": {
             "enabled": 1,

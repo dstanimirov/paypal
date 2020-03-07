@@ -27,8 +27,8 @@
     },
     "development": {
         "credentials": {
-            "client_id": "",
-            "client_secret": "-"
+            "client_id": "client_id_sandbox",
+            "client_secret": "client_secret_sandbox"
         },
         "debug": {
             "enabled": 1,
@@ -48,4 +48,6 @@
 
 *  Creating Order and redirect user to PayPal 
 
-see example-create-order-request.php
+```
+example-create-order-request.php
+```

@@ -1,12 +1,12 @@
 <?php
 
-require_once('vendor/autoload.php');
+require_once('../vendor/autoload.php');
 
 use Phalcon\Config\Adapter\Json;
 use Openapi\Phalcon\Plugins\PayPal\Checkout\Order;
 
 /* @var $credentials \Phalcon\Config\Adapter\Json Application credentials */
-$credentials = new Json('config.json');
+$credentials = new Json('../config.json');
 
 
 /**
@@ -17,7 +17,7 @@ $order = new Order($credentials);
 /**
  * get order id from session storage or database
  */
-$order_id = '52L95141GG2607136';
+$order_id = '2T860114R28901150';
 
 
 /**
@@ -44,3 +44,8 @@ $payer = $result->payer;
 /* @var $purchase_units \Openapi\Phalcon\Plugins\PayPal\Checkout\Types\PurchaseUnitType */
 $purchase_units = $result->purchase_units;
 
+
+
+echo '<pre>';
+print_r($result);
+echo '</pre>';

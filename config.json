@@ -1,6 +1,6 @@
 {
     "sandbox": 1,
-    "brand_name": "Custom Brand Name",
+    "brand_name": "My test Store",
     "production": {
         "credentials": {
             "client_id": "client_id_production",
@@ -32,7 +32,7 @@
             "PAYMENT": "",
             "BILLING": ""
         },
-        "return_url": "",
-        "cancel_url": ""
+        "return_url": "https://paypal-checkout.test/samples/accept-order-request.php",
+        "cancel_url": "https://paypal-checkout.test/cancel-order.php"
     }
 }

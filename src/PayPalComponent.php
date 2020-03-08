@@ -18,6 +18,11 @@ class PayPalComponent {
     private $config;
 
     /**
+     * @var \Phalcon\Config
+     */
+    private $env;
+
+    /**
      * @var string
      */
     private $client_id;
@@ -80,13 +85,9 @@ class PayPalComponent {
             $this->{$property} = $value;
         }
 
-        $credentials = $this->sandbox ?
+        $this->env = $this->sandbox ?
                 $config->path('development') :
                 $config->path('production');
-
-        $this->client_id = $credentials->path('credentials.client_id', false);
-
-        $this->client_secret = $credentials->path('credentials.client_secret', false);
     }
 
     /**
@@ -114,14 +115,14 @@ class PayPalComponent {
      * @return string PayPal Client ID
      */
     public function getClientId() {
-        return $this->client_id;
+        return !empty($this->client_id) ? $this->client_id : $this->env->path('credentials.client_id');
     }
 
     /**
      * @return string PayPal Client secret
      */
     public function getClientSecret() {
-        return $this->client_secret;
+        return !empty($this->client_secret) ? $this->client_secret : $this->env->path('credentials.client_secret');
     }
 
     /**
@@ -135,7 +136,7 @@ class PayPalComponent {
      * @return string Return URL
      */
     public function getReturnUrl() {
-        return $this->return_url;
+        return !empty($this->return_url) ? $this->return_url : $this->env->path('return_url');
     }
 
     /**
@@ -149,7 +150,7 @@ class PayPalComponent {
      * @return string Cancel URL
      */
     public function getCancelUrl() {
-        return $this->cancel_url;
+        return !empty($this->cancel_url) ? $this->cancel_url : $this->env->path('cancel_url');
     }
 
     /**

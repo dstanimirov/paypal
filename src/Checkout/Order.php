@@ -4,11 +4,12 @@ namespace Openapi\Phalcon\Plugins\PayPal\Checkout;
 
 use Phalcon\Config;
 use Openapi\Phalcon\Plugins\PayPal\PayPalComponent;
-use Openapi\Phalcon\Plugins\PayPal\Checkout\Types\OrderUnitType;
 use Openapi\Phalcon\Plugins\PayPal\Checkout\Types\PayerType;
+use Openapi\Phalcon\Plugins\PayPal\Checkout\Types\PurchaseUnitType;
 use Openapi\Phalcon\Plugins\PayPal\Checkout\Types\AcceptOrderResponseType;
 use Openapi\Phalcon\Plugins\PayPal\Checkout\Types\CreateOrderResponseType;
 use Openapi\Phalcon\Plugins\PayPal\Checkout\Constants\OrderConstants;
+use Openapi\Phalcon\Plugins\PayPal\Checkout\Constants\CurrenciesConstants;
 use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
 use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
@@ -32,6 +33,11 @@ class Order extends PayPalComponent {
      * @var string intent
      */
     private $intent;
+
+    /**
+     * @var string
+     */
+    private $order_currency;
 
     /**
      * @var \PayPalCheckoutSdk\Core\PayPalEnvironment
@@ -64,32 +70,11 @@ class Order extends PayPalComponent {
     private $order_accept_result;
 
     /**
-     * @param \Openapi\Phalcon\Plugins\PayPal\Checkout\OrderUnitType
+     * @param \Openapi\Phalcon\Plugins\PayPal\Checkout\Types\PurchaseUnitType
      */
-    public function addOrderUnit(OrderUnitType $order_unit) {
-
-        if (empty($order_unit->amount)) {
-            
-        }
-
-        $unit = [
-            "amount" => [
-                "value" => $order_unit->amount,
-                "currency_code" => $order_unit->currency_code
-            ]
-        ];
-
-        if (!empty($order_unit->reference_id)) {
-
-            $unit['reference_id'] = $order_unit->reference_id;
-        }
-
-        if (!empty($order_unit->description)) {
-
-            $unit['description'] = $order_unit->description;
-        }
-
-        $this->order_units[] = $unit;
+    public function addOrderUnit(PurchaseUnitType $order_unit) {
+        
+        $this->order_units[] = $order_unit->classToArray();
     }
 
     /**
@@ -97,6 +82,22 @@ class Order extends PayPalComponent {
      */
     public function setIntentCapture() {
         $this->intent = OrderConstants::INTENT_CAPTURE;
+    }
+
+    /**
+     * @param string $order_currency
+     */
+    public function setOrderCurrency($order_currency) {
+
+        $this->order_currency = $order_currency;
+    }
+
+    /**
+     * @return string if is not set, default is USD
+     */
+    public function getOrderCurrency() {
+
+        return !empty($this->order_currency) ? $this->order_currency : CurrenciesConstants::USD;
     }
 
     /**
@@ -271,7 +272,7 @@ class Order extends PayPalComponent {
             "locale" => !empty($this->getLocale()) ? $this->getLocale() : OrderConstants::LOCALE_US,
             "cancel_url" => $this->getCancelUrl(),
             "return_url" => $this->getReturnUrl(),
-            "user_action" => !empty($this->getUserAction()) ? $this->getUserAction() : OrderConstants::USER_ACTION_CONTINUE
+            "user_action" => !empty($this->getUserAction()) ? $this->getUserAction() : OrderConstants::USER_ACTION_PAY_NOW
         ];
 
         //add additional optiona if are set

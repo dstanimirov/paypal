@@ -46,10 +46,10 @@
 ``````
 
 
-*  Creating Order and redirect user to PayPal (example-create-order-request.php)
+*  Creating Order and redirect user to PayPal (samples/basic-order-request.php)
 
 
-*  Example response from PayPal after Create Order Request (example-create-order-response.json)
+*  Example response from PayPal after Create Order Request (samples/example-create-order-response.json)
 
 ```
 {
@@ -124,9 +124,9 @@ $redirect_url = $result->links->getApproveUrl();
 ``````
 
 
-*  Accept Order as send to PayPal the OrdersCaptureRequest (example-accept-order-request.php)
+*  Accept Order as send to PayPal the OrdersCaptureRequest (samples/accept-order-request.php)
 
-*  Example response from PayPal after Orders Capture Request (example-accept-order-response.json)
+*  Example response from PayPal after Orders Capture Request (samples/example-accept-order-response.json)
 
 ```
 {
